@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TARO — Mystic Editorial Mobile Design (375px)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --walnut: #100904;
+      --card-bg: #181009;
+      --bark: #382416;
+      --bark-hover: #4a301e;
+      --cork: #40372e;
+      --driftwood: #8c7b6d;
+      --cream: #ffedd7;
+      --ember: #dc5000;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background-color: #080402;
+      color: #ffedd7;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #40372e;
+      border-radius: 4px;
+    }
+    @keyframes subtleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+    .animate-float {
+      animation: subtleFloat 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-8 px-4 flex flex-col items-center justify-start select-none">
+
+  <!-- Header & Screen Navigation Controller -->
+  <header class="w-full max-w-4xl mb-6 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#40372e] bg-[#181009] text-xs text-[#8c7b6d] mb-3">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#dc5000]"></span>
+      <span>TARO Mobile Design System · 375px Viewport</span>
+    </div>
+    <h1 class="text-2xl font-cinzel tracking-wider text-[#ffedd7] mb-2">MYSTIC EDITORIAL DARKROOM</h1>
+    <p class="text-xs text-[#8c7b6d] max-w-md mx-auto">
+      PRD · 기능명세서 · 유저플로우 · 와이어프레임과 DESIGN.md 기준 모바일 디자인
+    </p>
+
+    <!-- Screen Mode Switcher Tabs -->
+    <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
+      <button onclick="switchTab('interactive')" id="tab-interactive" class="tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#ffedd7] bg-[#382416] text-[#ffedd7] transition-all">
+        ✨ 전체 인터랙티브 체험
+      </button>
+      <button onclick="switchTab('s01')" id="tab-s01" class="tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#40372e] bg-transparent text-[#8c7b6d] hover:text-[#ffedd7] transition-all">
+        S-01 시작 화면
+      </button>
+      <button onclick="switchTab('s02')" id="tab-s02" class="tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#40372e] bg-transparent text-[#8c7b6d] hover:text-[#ffedd7] transition-all">
+        S-02 정보 & 주제
+      </button>
+      <button onclick="switchTab('s03')" id="tab-s03" class="tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#40372e] bg-transparent text-[#8c7b6d] hover:text-[#ffedd7] transition-all">
+        S-03 맞춤 결과
+      </button>
+      <button onclick="switchTab('export')" id="tab-export" class="tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#40372e] bg-transparent text-[#8c7b6d] hover:text-[#ffedd7] transition-all">
+        🖼️ 1080×1350 저장 카드
+      </button>
+    </div>
+  </header>
+
+  <!-- 375px Phone Showcase Container -->
+  <main class="w-full flex items-center justify-center">
+
+    <!-- Phone Bezel / Mockup Frame (375px exact width inside) -->
+    <div class="relative w-[375px] h-[780px] bg-[#100904] rounded-[44px] border-[5px] border-[#2d2219] shadow-2xl overflow-hidden flex flex-col justify-between">
+      
+      <!-- Top Mobile Status Bar -->
+      <div class="w-full h-11 px-6 flex items-center justify-between text-[11px] text-[#8c7b6d] z-30 shrink-0 select-none">
+        <span class="font-semibold text-[#ffedd7]">09:41</span>
+        <!-- Dynamic Island / Speaker notch hint -->
+        <div class="w-24 h-4 bg-[#1e150f] rounded-full mx-auto"></div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Phone Screen Viewport (Scrollable container, height: 100%) -->
+      <div id="phone-screen" class="flex-1 w-full overflow-y-auto overflow-x-hidden relative flex flex-col justify-between px-6 pb-6 pt-2">
+        
+        <!-- ==================== SCREEN 01: 시작 (S-01) ==================== -->
+        <section id="view-s01" class="flex-1 flex flex-col justify-between items-center text-center py-4">
+          <!-- Top Tag -->
+          <div class="pt-2">
+            <span class="text-[10px] uppercase tracking-widest text-[#8c7b6d] font-cinzel">TARO : DAILY ESSENCE</span>
+          </div>
+
+          <!-- Hero Mystery Card Visual -->
+          <div class="my-auto flex flex-col items-center">
+            <!-- 3D Floating Tarot Card Back -->
+            <div class="animate-float relative w-[180px] h-[280px] rounded-xl bg-[#191008] border-2 border-[#40372e] p-3 flex flex-col items-center justify-between shadow-lg">
+              <div class="w-full flex justify-between text-[9px] text-[#8c7b6d] font-cinzel">
+                <span>✦</span><span>✦</span>
+              </div>
+              <div class="w-24 h-24 rounded-full border border-dashed border-[#40372e] flex items-center justify-center relative">
+                <div class="w-16 h-16 rounded-full border border-[#8c7b6d]/40 flex items-center justify-center">
+                  <span class="text-2xl text-[#ffedd7]">🔮</span>
+                </div>
+                <span class="absolute top-1 left-3 w-1 h-1 rounded-full bg-[#dc5000]"></span>
+                <span class="absolute bottom-2 right-3 w-1 h-1 rounded-full bg-[#dc5000]"></span>
+              </div>
+              <div class="w-full flex justify-between text-[9px] text-[#8c7b6d] font-cinzel">
+                <span>✦</span><span>✦</span>
+              </div>
+            </div>
+
+            <!-- Title & Pitch Copy -->
+            <h2 class="text-xl font-bold tracking-tight text-[#ffedd7] mt-7 mb-2">
+              오늘의 맞춤 타로
+            </h2>
+            <p class="text-xs text-[#8c7b6d] leading-relaxed max-w-[240px]">
+              내 정보를 넣고 카드 한 장으로<br>나에게 맞춘 짧은 해석을 받아 봐요.
+            </p>
+          </div>
+
+          <!-- S-01 Bottom Action -->
+          <div class="w-full mt-4 space-y-2">
+            <button onclick="goToScreen('s02')" class="w-full h-13 py-3.5 rounded-full bg-[#382416] text-[#ffedd7] border border-[#40372e] font-medium text-sm hover:bg-[#4a301e] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+              <span>타로 시작</span>
+              <span class="text-xs">→</span>
+            </button>
+            <p class="text-[10px] text-[#8c7b6d]">
+              ※ 오락용 타로 · 입력 정보는 저장하지 않아요
+            </p>
+          </div>
+        </section>
+
+
+        <!-- ==================== SCREEN 02: 정보 및 주제 입력 (S-02) ==================== -->
+        <section id="view-s02" class="hidden flex-1 flex flex-col justify-between py-2">
+          
+          <!-- Top Navigation Bar -->
+          <div class="flex items-center justify-between pb-3 border-b border-dashed border-[#40372e]/60">
+            <button onclick="goToScreen('s01')" class="text-sm text-[#8c7b6d] hover:text-[#ffedd7] flex items-center gap-1">
+              <span>←</span>
+              <span class="text-xs">처음으로</span>
+            </button>
+            <span class="text-xs font-semibold text-[#ffedd7]">나에 대해 알려 주세요</span>
+            <span class="w-8"></span>
+          </div>
+
+          <!-- Form Fields Container -->
+          <div class="space-y-4 my-auto py-2">
+            
+            <!-- 1. Name Input -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-[11px]">
+                <label for="input-name" class="text-[#8c7b6d] uppercase tracking-wider font-medium">이름 (닉네임 OK)</label>
+                <span id="name-counter" class="text-[10px] text-[#8c7b6d]">0/10자</span>
+              </div>
+              <input 
+                id="input-name" 
+                type="text" 
+                maxlength="10" 
+                placeholder="지민" 
+                value="지민"
+                oninput="validateForm()"
+                class="w-full h-10 bg-transparent border-0 border-b border-[#40372e] rounded-none px-0 text-[#ffedd7] text-sm placeholder:text-[#8c7b6d]/40 focus:outline-none focus:border-[#ffedd7] transition-colors"
+              />
+            </div>
+
+            <!-- 2. Birthdate Input -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-[11px]">
+                <label for="input-birth" class="text-[#8c7b6d] uppercase tracking-wider font-medium">생년월일 (8자리)</label>
+                <span id="zodiac-preview" class="text-[10px] text-[#dc5000] font-medium">♌ 사자자리</span>
+              </div>
+              <input 
+                id="input-birth" 
+                type="text" 
+                placeholder="2004 . 08 . 03" 
+                value="2004.08.03"
+                maxlength="10"
+                oninput="validateForm()"
+                class="w-full h-10 bg-transparent border-0 border-b border-[#40372e] rounded-none px-0 text-[#ffedd7] text-sm placeholder:text-[#8c7b6d]/40 focus:outline-none focus:border-[#ffedd7] transition-colors font-mono tracking-wider"
+              />
+            </div>
+
+            <!-- 3. Major Input (Optional) -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-[11px]">
+                <label for="input-major" class="text-[#8c7b6d] uppercase tracking-wider font-medium">전공 (선택)</label>
+                <span id="major-preview" class="text-[10px] text-[#8c7b6d]">경영 계열</span>
+              </div>
+              <input 
+                id="input-major" 
+                type="text" 
+                placeholder="예: 경영학과, 컴퓨터공학" 
+                value="경영학과"
+                oninput="validateForm()"
+                class="w-full h-10 bg-transparent border-0 border-b border-[#40372e] rounded-none px-0 text-[#ffedd7] text-sm placeholder:text-[#8c7b6d]/40 focus:outline-none focus:border-[#ffedd7] transition-colors"
+              />
+            </div>
+
+            <!-- 4. Topic Selection (6 Topics Grid) -->
+            <div class="space-y-2 pt-1">
+              <label class="text-[11px] text-[#8c7b6d] uppercase tracking-wider font-medium block">
+                어떤 주제가 궁금한가요?
+              </label>
+              <div class="grid grid-cols-3 gap-2" id="topic-grid">
+                <button type="button" onclick="selectTopic('career')" class="topic-chip active h-9 rounded-full border border-[#ffedd7] bg-[#382416] text-[#ffedd7] text-xs font-medium flex items-center justify-center gap-1 transition-all">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#dc5000]"></span>
+                  <span>💼 커리어</span>
+                </button>
+                <button type="button" onclick="selectTopic('wealth')" class="topic-chip h-9 rounded-full border border-[#40372e] bg-[#181009] text-[#8c7b6d] text-xs font-medium flex items-center justify-center gap-1 hover:text-[#ffedd7] transition-all">
+                  <span>💰 재물</span>
+                </button>
+                <button type="button" onclick="selectTopic('love')" class="topic-chip h-9 rounded-full border border-[#40372e] bg-[#181009] text-[#8c7b6d] text-xs font-medium flex items-center justify-center gap-1 hover:text-[#ffedd7] transition-all">
+                  <span>💕 연애</span>
+                </button>
+                <button type="button" onclick="selectTopic('health')" class="topic-chip h-9 rounded-full border border-[#40372e] bg-[#181009] text-[#8c7b6d] text-xs font-medium flex items-center justify-center gap-1 hover:text-[#ffedd7] transition-all">
+                  <span>🌿 건강</span>
+                </button>
+                <button type="button" onclick="selectTopic('study')" class="topic-chip h-9 rounded-full border border-[#40372e] bg-[#181009] text-[#8c7b6d] text-xs font-medium flex items-center justify-center gap-1 hover:text-[#ffedd7] transition-all">
+                  <span>📚 학업</span>
+                </button>
+                <button type="button" onclick="selectTopic('general')" class="topic-chip h-9 rounded-full border border-[#40372e] bg-[#181009] text-[#8c7b6d] text-xs font-medium flex items-center justify-center gap-1 hover:text-[#ffedd7] transition-all">
+                  <span>✨ 종합</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Privacy Assurance Callout Box -->
+            <div class="rounded-lg border border-dashed border-[#40372e] bg-[#181009]/80 p-2.5 flex items-start gap-2">
+              <span class="text-xs text-[#dc5000] mt-0.5">🔒</span>
+              <p class="text-[10px] leading-relaxed text-[#8c7b6d]">
+                입력한 이름 · 생년월일 · 전공은 해석을 만드는 데만 쓰고 저장하지 않아요. 창을 닫거나 [처음으로]를 누르면 바로 지워져요.
+              </p>
+            </div>
+          </div>
+
+          <!-- S-02 Bottom Action -->
+          <div class="w-full mt-2">
+            <button 
+              id="btn-draw" 
+              onclick="startCardDraw()" 
+              class="w-full h-13 py-3.5 rounded-full bg-[#382416] text-[#ffedd7] border border-[#40372e] font-medium text-sm hover:bg-[#4a301e] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+              <span>카드 한 장 뽑기</span>
+              <span class="text-xs">🎴</span>
+            </button>
+          </div>
+        </section>
+
+
+        <!-- ==================== SCREEN 03: 맞춤 해석 결과 (S-03) ==================== -->
+        <section id="view-s03" class="hidden flex-1 flex flex-col justify-between py-1">
+          
+          <!-- Top Mini Navigation -->
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-[10px] uppercase font-cinzel text-[#8c7b6d]">TARO RESULT CARD</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full border border-[#40372e] text-[#dc5000] bg-[#181009]">
+              개인정보 미보관
+            </span>
+          </div>
+
+          <!-- S-03 The Result Card (Capture Area, 4:5 Aspect Ratio Container) -->
+          <div id="exportable-card" class="w-full rounded-xl border border-[#40372e] bg-[#181009] p-4 text-center my-auto relative shadow-inner">
+            
+            <!-- Result Card Header -->
+            <div class="text-xs font-semibold text-[#ffedd7] mb-3 flex items-center justify-center gap-1.5">
+              <span id="res-name-title">지민</span><span>님의 타로 · </span><span id="res-topic-title" class="text-[#dc5000]">커리어</span>
+            </div>
+
+            <!-- 3D Card Flipping Stage -->
+            <div class="perspective-1000 w-[140px] h-[190px] mx-auto my-2">
+              <div id="flip-card-inner" class="relative w-full h-full transform-style-3d transition-transform duration-700">
+                
+                <!-- Card Front (Arcana Illustrated View) -->
+                <div class="absolute inset-0 w-full h-full rounded-lg bg-[#22160d] border border-[#ffedd7]/30 p-2 flex flex-col items-center justify-between backface-hidden">
+                  <div class="w-full flex justify-between text-[8px] text-[#ffedd7]/60 font-cinzel">
+                    <span>XIX</span>
+                    <span>THE SUN</span>
+                  </div>
+                  <div class="w-16 h-16 rounded-full border border-dashed border-[#ffedd7]/40 flex items-center justify-center bg-[#382416]/50">
+                    <span class="text-3xl">☀️</span>
+                  </div>
+                  <div class="w-full text-center">
+                    <div class="text-[11px] font-cinzel font-bold text-[#ffedd7] tracking-wider">XIX 태양</div>
+                    <div class="text-[8px] text-[#8c7b6d]">SUCCESS & VITALITY</div>
+                  </div>
+                </div>
+
+                <!-- Card Back -->
+                <div class="absolute inset-0 w-full h-full rounded-lg bg-[#140c06] border border-[#40372e] p-2 flex items-center justify-center rotate-y-180 backface-hidden">
+                  <span class="text-xl">🔮</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Subtitle -->
+            <div class="text-[11px] text-[#8c7b6d] mt-2 mb-3">
+              <span class="font-cinzel text-[#ffedd7]">XIX 태양</span> · <span id="res-zodiac">♌ 사자자리</span>
+            </div>
+
+            <!-- 3-Line Customized Interpretation -->
+            <div class="border-t border-b border-dashed border-[#40372e] py-2.5 my-2 text-left space-y-1.5">
+              <p class="text-xs text-[#ffedd7] leading-relaxed">
+                <span class="text-[#dc5000] font-bold">1. </span><span id="res-line1">지민님, 준비한 것을 세상에 드러낼 때예요.</span>
+              </p>
+              <p class="text-xs text-[#ffedd7] leading-relaxed">
+                <span class="text-[#dc5000] font-bold">2. </span><span id="res-line2">사자자리의 당당한 자신감이 오늘은 가장 강력한 무기가 돼요.</span>
+              </p>
+              <p class="text-xs text-[#ffedd7] leading-relaxed" id="res-line3-container">
+                <span class="text-[#dc5000] font-bold">3. </span><span id="res-line3">경영학도다운 날카로운 기획력이 빛을 발하는 날이에요.</span>
+              </p>
+            </div>
+
+            <!-- Card Footer Legal -->
+            <div class="flex justify-between items-center text-[9px] text-[#8c7b6d] pt-1">
+              <span>※ 오락용 타로 해석입니다</span>
+              <span class="font-cinzel text-[8px] text-[#8c7b6d]">TARO · 2026</span>
+            </div>
+          </div>
+
+          <!-- S-03 Action Button Groups -->
+          <div class="w-full space-y-2 mt-2">
+            <div class="flex gap-2">
+              <button onclick="handleSaveImage()" class="flex-1 h-10 rounded-full border border-[#ffedd7]/30 bg-transparent text-[#ffedd7] hover:border-[#ffedd7] text-xs font-medium flex items-center justify-center gap-1.5 transition-all">
+                <span>📥 이미지 저장</span>
+              </button>
+              <button onclick="handleShare()" class="flex-1 h-10 rounded-full border border-[#ffedd7]/30 bg-transparent text-[#ffedd7] hover:border-[#ffedd7] text-xs font-medium flex items-center justify-center gap-1.5 transition-all">
+                <span>🔗 결과 공유</span>
+              </button>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 pt-1">
+              <button onclick="goToScreen('s02')" class="text-[11px] text-[#8c7b6d] hover:text-[#ffedd7] underline underline-offset-4 decoration-dashed">
+                다시 뽑기
+              </button>
+              <span class="text-[10px] text-[#40372e]">|</span>
+              <button onclick="handleResetAll()" class="text-[11px] text-[#8c7b6d] hover:text-[#ffedd7] underline underline-offset-4 decoration-dashed">
+                처음으로 (정보 지우기)
+              </button>
+            </div>
+
+            <p class="text-[9px] text-center text-[#8c7b6d]">
+              🔒 창을 닫거나 [처음으로]를 누르면 모든 정보가 삭제됩니다.
+            </p>
+          </div>
+        </section>
+
+
+        <!-- ==================== VIEW: 1080×1350 카드 저장 전용 프리뷰 ==================== -->
+        <section id="view-export" class="hidden flex-1 flex flex-col justify-between py-2 text-center">
+          <div class="pb-2 text-left">
+            <span class="text-[10px] text-[#dc5000] uppercase font-cinzel">F-5 SPECIFICATION</span>
+            <h3 class="text-sm font-semibold text-[#ffedd7]">1080×1350 (4:5) PNG 저장 규격</h3>
+            <p class="text-[10px] text-[#8c7b6d]">생년월일·전공 원문은 제외하고 이름과 별자리만 렌더링</p>
+          </div>
+
+          <div class="w-[280px] h-[350px] mx-auto rounded-xl border-2 border-[#40372e] bg-[#140c06] p-4 flex flex-col justify-between shadow-2xl relative">
+            <div class="border-b border-[#40372e] pb-1.5 flex justify-between items-center text-[8px] font-cinzel text-[#8c7b6d]">
+              <span>TARO : DAILY ESSENCE</span>
+              <span>2026.11.19</span>
+            </div>
+            
+            <div class="my-auto">
+              <div class="text-xs font-semibold text-[#ffedd7] mb-1.5">지민님의 타로 · 커리어</div>
+              <div class="w-16 h-22 mx-auto rounded border border-[#ffedd7]/30 bg-[#24160c] flex flex-col items-center justify-center p-1 mb-2">
+                <span class="text-2xl">☀️</span>
+                <span class="text-[8px] font-cinzel mt-1 text-[#ffedd7]">XIX THE SUN</span>
+              </div>
+              <div class="text-[9px] text-[#8c7b6d] mb-2 font-cinzel">XIX 태양 · ♌ 사자자리</div>
+              <div class="text-[9px] text-[#ffedd7] leading-relaxed text-left space-y-1 bg-[#1c1209] p-2 rounded border border-dashed border-[#40372e]">
+                <div>• 지민님, 준비한 것을 세상에 드러낼 때예요.</div>
+                <div>• 사자자리의 자신감이 오늘은 무기가 돼요.</div>
+                <div>• 경영학도다운 기획력이 빛나는 날이에요.</div>
+              </div>
+            </div>
+
+            <div class="border-t border-[#40372e] pt-1 text-[8px] text-[#8c7b6d] flex justify-between">
+              <span>※ 오락용 타로 해석입니다</span>
+              <span class="font-cinzel">TARO</span>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <button onclick="goToScreen('s03')" class="w-full h-10 rounded-full border border-[#40372e] text-xs text-[#8c7b6d] hover:text-[#ffedd7]">
+              ← 결과 화면으로 돌아가기
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Bottom Home Indicator Bar -->
+      <div class="w-full h-5 flex items-center justify-center pb-2 shrink-0">
+        <div class="w-32 h-1 bg-[#3a2f26] rounded-full"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Interactive Toast Notification Element -->
+  <div id="toast" class="fixed bottom-6 z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-3 px-4 py-2.5 rounded-full border border-[#40372e] bg-[#1a110a] text-xs text-[#ffedd7] shadow-xl flex items-center gap-2">
+    <span class="text-[#dc5000]">✦</span>
+    <span id="toast-message">알림 메시지</span>
+  </div>
+
+  <script>
+    let currentTopic = 'career';
+    const topicLabels = {
+      career: '커리어',
+      wealth: '재물',
+      love: '연애',
+      health: '건강',
+      study: '학업',
+      general: '종합'
+    };
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      text.textContent = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-[#ffedd7]', 'bg-[#382416]', 'text-[#ffedd7]');
+        btn.classList.add('border-[#40372e]', 'bg-transparent', 'text-[#8c7b6d]');
+      });
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('border-[#ffedd7]', 'bg-[#382416]', 'text-[#ffedd7]');
+        activeBtn.classList.remove('border-[#40372e]', 'bg-transparent', 'text-[#8c7b6d]');
+      }
+
+      if (tabId === 'interactive') {
+        goToScreen('s01');
+      } else if (tabId === 's01') {
+        goToScreen('s01');
+      } else if (tabId === 's02') {
+        goToScreen('s02');
+      } else if (tabId === 's03') {
+        goToScreen('s03');
+      } else if (tabId === 'export') {
+        goToScreen('export');
+      }
+    }
+
+    function goToScreen(screenId) {
+      document.getElementById('view-s01').classList.add('hidden');
+      document.getElementById('view-s02').classList.add('hidden');
+      document.getElementById('view-s03').classList.add('hidden');
+      document.getElementById('view-export').classList.add('hidden');
+
+      const target = document.getElementById('view-' + screenId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+    }
+
+    function selectTopic(topic) {
+      currentTopic = topic;
+      document.querySelectorAll('.topic-chip').forEach(chip => {
+        chip.classList.remove('border-[#ffedd7]', 'bg-[#382416]', 'text-[#ffedd7]');
+        chip.classList.add('border-[#40372e]', 'bg-[#181009]', 'text-[#8c7b6d]');
+        const dot = chip.querySelector('.rounded-full');
+        if (dot) dot.remove();
+      });
+
+      const eventTarget = event.currentTarget;
+      eventTarget.classList.remove('border-[#40372e]', 'bg-[#181009]', 'text-[#8c7b6d]');
+      eventTarget.classList.add('border-[#ffedd7]', 'bg-[#382416]', 'text-[#ffedd7]');
+      
+      const dot = document.createElement('span');
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-[#dc5000]';
+      eventTarget.prepend(dot);
+
+      validateForm();
+    }
+
+    function validateForm() {
+      const name = document.getElementById('input-name').value.trim();
+      const birth = document.getElementById('input-birth').value.trim();
+      const btn = document.getElementById('btn-draw');
+      
+      document.getElementById('name-counter').textContent = `${name.length}/10자`;
+
+      if (name.length > 0 && birth.length >= 8) {
+        btn.disabled = false;
+        btn.classList.remove('opacity-40', 'pointer-events-none');
+      } else {
+        btn.disabled = true;
+        btn.classList.add('opacity-40', 'pointer-events-none');
+      }
+    }
+
+    function startCardDraw() {
+      const name = document.getElementById('input-name').value.trim() || '지민';
+      const major = document.getElementById('input-major').value.trim();
+
+      document.getElementById('res-name-title').textContent = name;
+      document.getElementById('res-topic-title').textContent = topicLabels[currentTopic] || '커리어';
+      document.getElementById('res-line1').textContent = `${name}님, 준비한 것을 세상에 드러낼 때예요.`;
+
+      if (!major) {
+        document.getElementById('res-line3-container').style.display = 'none';
+      } else {
+        document.getElementById('res-line3-container').style.display = 'block';
+        document.getElementById('res-line3').textContent = `${major} 전공다운 기획력과 감각이 빛을 발하는 날이에요.`;
+      }
+
+      goToScreen('s03');
+
+      const flipInner = document.getElementById('flip-card-inner');
+      flipInner.classList.add('rotate-y-180');
+      setTimeout(() => {
+        flipInner.classList.remove('rotate-y-180');
+      }, 50);
+    }
+
+    function handleSaveImage() {
+      showToast("이미지를 저장했어요 (1080×1350 PNG)");
+    }
+
+    function handleShare() {
+      if (navigator.share) {
+        navigator.share({
+          title: '오늘의 타로 결과',
+          text: '🔮 타로 결과가 나왔어요! 나도 한 장 뽑기 → https://taro.app',
+        }).catch(() => {});
+      } else {
+        showToast("결과를 복사했어요. 원하는 앱에 붙여넣어 주세요.");
+      }
+    }
+
+    function handleResetAll() {
+      document.getElementById('input-name').value = '';
+      document.getElementById('input-birth').value = '';
+      document.getElementById('input-major').value = '';
+      validateForm();
+      goToScreen('s01');
+      showToast("입력 정보를 모두 삭제하고 초기화했습니다.");
+    }
+
+    validateForm();
+  </script>
+</body>
+</html>
